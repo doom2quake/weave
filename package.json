@@ -1,0 +1,13 @@
+{
+  "name": "weave-webmcp",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "sync:file-runtime": "node scripts/generate-file-runtime.mjs",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

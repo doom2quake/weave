@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Weave turns one thought into a clear, movable plan with browser-native site tools.">
+    <meta name="theme-color" content="#f2eee5">
+    <title>Weave | Turn a thought into a plan</title>
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <a class="skip-link" href="#plan-canvas">Skip to the plan canvas</a>
+    <div class="ambient ambient-one" aria-hidden="true"></div>
+    <div class="ambient ambient-two" aria-hidden="true"></div>
+
+    <header class="topbar">
+      <a class="brand" href="#top" aria-label="Weave home">
+        <span class="weave-mark" aria-hidden="true"><i></i><i></i><b></b><b></b></span>
+        <span><strong>Weave</strong><small>thoughts into motion</small></span>
+      </a>
+      <div class="tool-status" aria-live="polite">
+        <span class="status-dot"></span>
+        <b data-tool-count>0</b>
+        <span>site tools ready</span>
+        <em data-host-mode>connecting</em>
+      </div>
+      <button class="round-button" type="button" data-open-help aria-label="Open help">?</button>
+    </header>
+
+    <main id="top">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="eyebrow"><span></span> FROM THOUGHT TO SHAPE</p>
+          <h1 id="hero-title">Turn a thought into<br>a plan you can <em>move.</em></h1>
+          <p class="hero-intro">Start with one sentence. Build the steps with your browser, then drag, edit, group, schedule, and export the result right here.</p>
+        </div>
+
+        <div class="start-card">
+          <form data-goal-form>
+            <label for="goal-input">What do you want to make happen?</label>
+            <div class="goal-control">
+              <input id="goal-input" name="goal" type="text" maxlength="180" autocomplete="off" placeholder="Plan a 3-day Lisbon trip" required>
+              <button class="arrow-button" type="submit" aria-label="Start this plan"><span>Start</span><b aria-hidden="true">↗</b></button>
+            </div>
+          </form>
+          <div class="example-row" aria-label="Example goals">
+            <span>Try</span>
+            <button type="button" data-example="Plan a 3-day Lisbon trip">Lisbon trip</button>
+            <button type="button" data-example="Map my product launch">Product launch</button>
+            <button type="button" data-example="Outline a 5-page essay">Essay outline</button>
+          </div>
+          <button class="sample-button" type="button" data-build-sample>
+            <span class="sample-icon" aria-hidden="true">✦</span>
+            <span><strong>Build a sample plan</strong><small>Watch 31 real tool calls shape a Lisbon trip</small></span>
+            <kbd>B</kbd>
+          </button>
+        </div>
+      </section>
+
+      <section class="judge-prompt" aria-labelledby="prompt-title">
+        <div class="prompt-label">
+          <span class="chat-orb" aria-hidden="true"><i></i></span>
+          <div><small>TRY IN CHATGPT'S BROWSER</small><strong id="prompt-title">Open this page, then type:</strong></div>
+        </div>
+        <q data-judge-prompt>Use this page's site tools to plan a 3-day Lisbon trip. Add a goal plus practical cards, link dependencies, group them into Prep, Lisbon days, and Day trip, schedule the trip across three days, reflow it as a timeline, summarize the plan, and export it as Markdown.</q>
+        <button type="button" data-copy-prompt><span>Copy prompt</span><b aria-hidden="true">⌘C</b></button>
+      </section>
+
+      <section class="workspace" aria-labelledby="canvas-title">
+        <header class="workspace-head">
+          <div class="workspace-title">
+            <span class="canvas-kicker">LIVE PLAN</span>
+            <h2 id="canvas-title">Your canvas</h2>
+            <p><b data-card-count>0</b> cards · <b data-link-count>0</b> links · <b data-group-count>0</b> groups</p>
+          </div>
+          <div class="workspace-actions">
+            <div class="segmented" aria-label="Board layout">
+              <button type="button" data-layout="canvas" aria-pressed="true">Canvas</button>
+              <button type="button" data-layout="columns" aria-pressed="false">Columns</button>
+              <button type="button" data-layout="timeline" aria-pressed="false">Timeline</button>
+            </div>
+            <div class="export-actions">
+              <button class="soft-button" type="button" data-export="markdown">Export .md</button>
+              <button class="icon-reset" type="button" data-clear-board aria-label="Clear board">↺</button>
+            </div>
+          </div>
+        </header>
+
+        <div class="workspace-grid">
+          <article id="plan-canvas" class="board-panel" aria-label="Movable plan board">
+            <div class="board-viewport" data-board-viewport>
+              <div class="board-stage" data-board-stage>
+                <div class="board-grid" aria-hidden="true"></div>
+                <div class="group-layer" data-group-layer></div>
+                <div class="timeline-layer" data-timeline-layer hidden></div>
+                <svg class="link-layer" data-link-layer aria-label="Connections between plan cards">
+                  <defs>
+                    <marker id="link-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+                      <path d="M 0 0 L 10 5 L 0 10 z"></path>
+                    </marker>
+                  </defs>
+                  <g data-link-paths></g>
+                </svg>
+                <div class="card-layer" data-card-layer></div>
+                <div class="board-empty" data-board-empty>
+                  <span class="empty-weave" aria-hidden="true"><i></i><i></i><b></b></span>
+                  <strong>One sentence is enough.</strong>
+                  <p>Start above, try an example, or let the sample build itself.</p>
+                </div>
+              </div>
+            </div>
+            <footer class="canvas-tip">
+              <span><i aria-hidden="true">↔</i> Drag cards to make the plan yours</span>
+              <span><i aria-hidden="true">✎</i> Click any card text to edit</span>
+              <span class="receipt-count"><b data-receipt-count>0</b> moves receipted</span>
+            </footer>
+          </article>
+
+          <aside class="right-rail">
+            <article class="rail-card summary-card" aria-labelledby="summary-title">
+              <header>
+                <div><span>PLAN AT A GLANCE</span><h3 id="summary-title">A clear next move</h3></div>
+                <button type="button" data-summarize aria-label="Refresh plan summary">↻</button>
+              </header>
+              <div class="summary-content" data-summary-content>
+                <div class="summary-empty">
+                  <span aria-hidden="true">◎</span>
+                  <p>Your overview, groups, and next moves will appear as the board takes shape.</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="rail-card activity-card" aria-labelledby="activity-title">
+              <header>
+                <div><span>LIVE ACTIVITY</span><h3 id="activity-title">Moves on the board</h3></div>
+                <em><i></i> LIVE</em>
+              </header>
+              <div class="activity-feed" data-activity-feed aria-live="polite">
+                <div class="activity-empty"><span>⌁</span><p>Tool calls will appear here as cards, links, groups, and schedules are made.</p></div>
+              </div>
+            </article>
+
+            <article class="rail-card artifacts-card" aria-labelledby="artifacts-title">
+              <header>
+                <div><span>TAKE IT WITH YOU</span><h3 id="artifacts-title">Exports</h3></div>
+                <button type="button" data-export="json">JSON</button>
+              </header>
+              <div class="artifact-list" data-artifact-list>
+                <p>No exports yet. Markdown and JSON stay on this device.</p>
+              </div>
+            </article>
+          </aside>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span><strong>Weave</strong> by the doom2quake collective.</span>
+      <span>No account. No upload. No network request. Your board stays in this tab.</span>
+    </footer>
+
+    <dialog class="clear-dialog" data-clear-dialog aria-labelledby="clear-title">
+      <form method="dialog">
+        <span class="dialog-mark" aria-hidden="true">↺</span>
+        <small>PERSONAL CHECKPOINT</small>
+        <h2 id="clear-title">Clear this board?</h2>
+        <p data-clear-description>This removes the current local plan. Export anything you want to keep first.</p>
+        <div class="clear-scope"><i></i><span data-clear-scope>All cards, links, groups, and schedules on this page</span></div>
+        <div class="dialog-actions">
+          <button type="button" class="soft-button" data-deny-clear>Keep my plan</button>
+          <button type="button" class="danger-button" data-approve-clear>Clear board</button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog class="help-dialog" data-help-dialog aria-labelledby="help-title">
+      <form method="dialog">
+        <button class="dialog-close" value="close" type="submit" aria-label="Close help">×</button>
+        <p class="eyebrow"><span></span> HOW IT WORKS</p>
+        <h2 id="help-title">The page becomes a shared planning surface.</h2>
+        <div class="help-grid">
+          <section><b>01</b><h3>Say the outcome</h3><p>Start with one goal. No account, file, or setup is needed.</p></section>
+          <section><b>02</b><h3>Build in view</h3><p>Site tools add, connect, group, schedule, and arrange the same cards you can touch.</p></section>
+          <section><b>03</b><h3>Make it yours</h3><p>Drag and edit the plan, ask for a summary, then export Markdown or JSON.</p></section>
+        </div>
+        <p class="help-note"><kbd>B</kbd> build the sample <kbd>Esc</kbd> close this panel</p>
+      </form>
+    </dialog>
+
+    <div class="active-move" data-active-move hidden aria-live="polite">
+      <span></span><small>WORKING ON THE BOARD</small><strong data-active-tool>addCard</strong>
+    </div>
+    <div class="toast-region" data-toast-region aria-live="polite" aria-atomic="true"></div>
+
+    <script>
+      (() => {
+        const runtime = document.createElement("script");
+        runtime.async = false;
+        if (location.protocol === "file:") {
+          runtime.src = "./src/file-runtime.js";
+          runtime.dataset.runtime = "file-compatibility";
+        } else {
+          runtime.type = "module";
+          runtime.src = "./src/main.js";
+          runtime.dataset.runtime = "es-module";
+        }
+        document.body.append(runtime);
+      })();
+    </script>
+  </body>
+</html>

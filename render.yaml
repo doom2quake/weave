@@ -1,0 +1,10 @@
+# Render Blueprint: Weave is a zero-dependency static site (no backend, no build).
+# On Render this deploys as a free Static Site with automatic HTTPS. No compute is used,
+# so Render credits are untouched. Connect this repo in Render and it picks this up.
+services:
+  - type: web
+    name: weave
+    runtime: static
+    buildCommand: "echo no build step required"
+    staticPublishPath: .
+    pullRequestPreviewsEnabled: false
